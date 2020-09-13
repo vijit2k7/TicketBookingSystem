@@ -2,6 +2,7 @@ const Joi = require('joi');
 const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
+const _ = require('lodash');
 const {User,validate}=require('../models/user');
 
 router.get('/',async (req,res)=>{
@@ -19,15 +20,10 @@ router.post('/', async (req, res) => {
   	if(obj) return res.status(400).send('The user is already registered'); 
   });
 
-  user = new User({ 
-  		name: req.body.name, 
-  		email: req.body.email, 
-  		password: req.body.password,
-  		phone: req.body.phone
-  	});
+  user = new User(_.pick(req.body,['name','email','password','phone']));
   user = await user.save();
 
-  res.send(user);
+  res.send(_pick(user,['name','email','phone']));
 });
 
 module.exports = router;
