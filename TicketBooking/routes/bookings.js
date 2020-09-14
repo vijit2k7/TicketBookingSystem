@@ -2,6 +2,7 @@ const Joi = require('joi');
 const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
+const auth = require('../middleware/auth');
 const {Booking,validate}=require('../models/booking');
 const {Ticket} = require('../models/ticket'); // To find the ticket by ticket id
 
@@ -11,7 +12,7 @@ router.get('/', async (req, res) => {
   res.send(bookings);
 });
 
-router.post('/', async (req, res) => {
+router.post('/',auth,async (req, res) => {   //adding a middleware auth so that only authenticated users can do a booking.
   const { error } = validate(req.body); 
   if (error) return res.status(400).send(error.details[0].message);
 

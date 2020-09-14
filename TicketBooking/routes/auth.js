@@ -1,5 +1,3 @@
-const config=require('config');
-const jwt=require('jsonwebtoken')
 const Joi = require('joi');
 const mongoose = require('mongoose');
 const bcrypt=require('bcrypt')
@@ -25,7 +23,7 @@ router.post('/', async (req, res) => {
   if(!validPassword) return res.status(400).send('Invalid email or password!');
 
   //Creating a signed jwt token for client after authentication is done
-  const token=jwt.sign({id: user._id},config.get('jwtPrivateKey'));  // We can't give private key value here hence we will npm i config
+  const token=user.generateAuthToken();  // We can't give private key value here hence we will npm i config
   res.send(token);
 
 
