@@ -1,3 +1,5 @@
+const config=require('config');
+const jwt=require('jsonwebtoken')
 const Joi = require('joi');
 const mongoose = require('mongoose');
 const bcrypt=require('bcrypt')
@@ -18,11 +20,13 @@ router.post('/', async (req, res) => {
   let user =await User.findOne ({"email":req.body.email})
   if(!user) return res.status(400).send('Invalid email or password!'); 
 
-  const validPassword=await bcrypt.compare(req.body.password,user.password);
+  const validPassword=await bcrypt.compare(req.body.password,user.password);   
   console.log("valid password is",validPassword)
   if(!validPassword) return res.status(400).send('Invalid email or password!');
 
-  res.send(true);
+  //Creating a signed jwt token for client after authentication is done
+  const token=jwt.sign({id: user._id},config.get('jwtPrivateKey'));  // We can't give private key value here hence we will npm i config
+  res.send(token);
 
 
 });
