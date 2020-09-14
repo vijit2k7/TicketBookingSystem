@@ -1,3 +1,5 @@
+const config=require('config');
+const jwt=require('jsonwebtoken');
 const Joi = require('joi');
 const mongoose = require('mongoose');
 const bcrypt=require('bcrypt')
@@ -27,7 +29,10 @@ router.post('/', async (req, res) => {
 
   user = await user.save();
 
-  res.send(_.pick(user,['name','email','phone']));
+  //We need to send the authorisation jwt token in the headers
+  const token=jwt.sign({id: user._id},config.get('jwtPrivateKey'));
+
+  res.header('x-auth-token',token).send(_.pick(user,['name','email','phone']));
 });
 
 module.exports = router;
