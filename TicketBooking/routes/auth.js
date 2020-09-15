@@ -6,6 +6,7 @@ const router = express.Router();
 const _ = require('lodash');
 const {User}=require('../models/user');
 
+
 router.get('/',async (req,res)=>{
   const customers = await User.find().sort('name');
   res.send(customers);

@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth');
+const admin = require('../middleware/admin');
 const {Booking,validate}=require('../models/booking');
 const {Ticket} = require('../models/ticket'); // To find the ticket by ticket id
 
@@ -35,6 +36,14 @@ router.post('/',auth,async (req, res) => {   //adding a middleware auth so that 
   console.log("ticket after update",ticket);
   booking = await booking.save();
   
+  res.send(booking);
+});
+
+router.delete('/:id', [auth,admin],async (req, res) => {     //adding 2 middlewares auth and admin so as to authenticate and authorise admin users
+  const booking = await Booking.findByIdAndRemove(req.params.id);
+
+  if (!booking) return res.status(404).send('The booking with the given ID was not found.');
+  const ticket = await Ticket.updateOne({"seatNumber":booking.ticket.seatNumber}, {$set:{ "status": false } });
   res.send(booking);
 });
 

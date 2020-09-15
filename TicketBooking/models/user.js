@@ -27,10 +27,11 @@ const userSchema=new mongoose.Schema({
         maxlength: 10,
         minlength: 10
       },
+      isAdmin: Boolean
 
 });
 userSchema.methods.generateAuthToken=function(){   //Note can't use arrow function here as this obj wont refer to the user obj.
-    const token= jwt.sign({id: this._id},config.get('jwtPrivateKey'));  //Encapsulating the mongoose auth token logic in the model.
+    const token= jwt.sign({id: this._id , isAdmin: this.isAdmin},config.get('jwtPrivateKey'));  //Encapsulating the mongoose auth token logic in the model.
     return token;
 }
 const User = mongoose.model('User', userSchema);
