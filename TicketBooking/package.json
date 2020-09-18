@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watchAll"
+    "test": "jest --watchAll --verbose"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +19,8 @@
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.20",
     "mongoose": "^5.10.4",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "supertest": "^4.0.2",
+    "winston": "^3.3.3"
   }
 }

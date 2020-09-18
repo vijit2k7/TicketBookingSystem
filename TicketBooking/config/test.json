@@ -1,3 +1,4 @@
 {
-	"jwtPrivateKey":"ticketBooking_jwtPrivateKey"
+	"jwtPrivateKey":"ticketBooking_jwtPrivateKey",
+	"db":"mongodb://localhost/ticketBooking_test"
 }

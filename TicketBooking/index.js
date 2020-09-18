@@ -10,13 +10,13 @@ const app = express();
 //We will check if the jwt private key is defined or not and if not defined we will exit the process
 if(!config.get('jwtPrivateKey'))
 {
-	console.log('FATAL ERROR!:jwtPrivateKey is not defined!')
+	console.log(config.db)
 	process.exit(1);  //1 to exit the app
 }
-
-mongoose.connect('mongodb://localhost/ticketBooking')
-  .then(() => console.log('Connected to MongoDB...'))
-  .catch(err => console.error('Could not connect to MongoDB...'));
+const db = config.get('db');
+mongoose.connect(db)
+  .then(() => console.log(`Connected to ${db}...`))
+  .catch(err => console.error(`Could not connect to ${db}...`));
 
 app.use(express.json());
 app.use('/api/tickets', tickets);
@@ -25,4 +25,5 @@ app.use('/api/bookings', bookings);
 app.use('/api/auth', auth);
 
 const port = process.env.PORT || 3000;
-app.listen(port, () => console.log(`Listening on port ${port}...`));
+const server=app.listen(port, () => console.log(`Listening on port ${port}...`));
+module.exports=server;
