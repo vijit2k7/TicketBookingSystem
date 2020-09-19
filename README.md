@@ -57,6 +57,28 @@ Run npm start or node server for a running development server. Navigate to http:
        localhost:3000/api/tickets/reset
 
 ## Screenshots
-  ❮img src="TicketBooking/postman_screenshot/register_admin_user.png" ❯
-  ![alt text](TicketBooking/postman_screenshot/register_admin_user.png "Description goes here")
+  ![alt text](TicketBooking/postman_screenshots/register_admin_user.png "Registering an Admin User")
+  
+  
+  ![alt text](TicketBooking/postman_screenshots/authenticating_user.png "Authenticating the user")
+  
+  
+  ![alt text](TicketBooking/postman_screenshots/posting_tickets.png "Registering all 40 tickets in the database with status as false")
+  
+  
+  ![alt text](TicketBooking/postman_screenshots/Booking_ticket.png "Book a ticket for which the seat is available")
 
+
+  ![alt text](TicketBooking/postman_screenshots/booking_same_ticket.png "Book the same ticket for which the seat is not available")
+
+
+  ![alt text](TicketBooking/postman_screenshots/get_tickets.png "Fetch all tickets with thier statuses")
+  
+  
+  ![alt text](TicketBooking/postman_screenshots/fetch_closed_tickets.png "Fetch all closed tickets")
+
+
+  ![alt text](TicketBooking/postman_screenshots/tickets_forbidden.png "Post tickets when u dont have admin authentication")
+  
+  
+  ![alt text](TicketBooking/postman_screenshots/reset_all_tickets.png "Reset all the tickets Only admin user can do it")
