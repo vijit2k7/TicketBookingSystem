@@ -1,4 +1,5 @@
 const Joi = require('joi');
+const validateObjectId=require('../middleware/validateObjectId');
 const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
@@ -39,7 +40,7 @@ router.post('/',auth,async (req, res) => {   //adding a middleware auth so that 
   res.send(booking);
 });
 
-router.delete('/:id', [auth,admin],async (req, res) => {     //adding 2 middlewares auth and admin so as to authenticate and authorise admin users
+router.delete('/:id', [auth,admin,validateObjectId],async (req, res) => {     //adding 2 middlewares auth and admin so as to authenticate and authorise admin users
   const booking = await Booking.findByIdAndRemove(req.params.id);
 
   if (!booking) return res.status(404).send('The booking with the given ID was not found.');
@@ -47,11 +48,9 @@ router.delete('/:id', [auth,admin],async (req, res) => {     //adding 2 middlewa
   res.send(booking);
 });
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', validateObjectId,async (req, res) => {
 
-  //to check if we are passing a valid object id
-  if(!mongoose.Types.ObjectId.isValid(req.params.id))
-    return res.status(404).send('Invalid ID.');
+
 
   const booking = await Booking.findById(req.params.id);
 

@@ -6,13 +6,13 @@ const Booking = mongoose.model('Booking', new mongoose.Schema({
   passFirstName: {
     type: String,
     required: true,
-    minlength: 1,
+    minlength: 3,
     maxlength: 50
   },
   passLastName: {
     type: String,
     required: true,
-    minlength: 1,
+    minlength: 3,
     maxlength: 50
   },
   passPhoneNumber: {
@@ -41,8 +41,8 @@ const Booking = mongoose.model('Booking', new mongoose.Schema({
 }));
 function validateBooking(booking) {
   const schema = {
-    passFirstName: Joi.string().min(1).max(50).required(),
-    passLastName: Joi.string().min(1).max(50).required(),
+    passFirstName: Joi.string().min(3).max(50).required(),
+    passLastName: Joi.string().min(3).max(50).required(),
     seatNumber: Joi.number().min(1).max(40).required(),     // we dont put ticket object here instead we put the id so as to recognize the ticket
     passPhoneNumber: Joi.string().min(10).max(10).required(),
     passEmail:Joi.string().required().email(),  // to verify if the email is correct or not
