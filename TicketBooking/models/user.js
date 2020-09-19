@@ -27,7 +27,10 @@ const userSchema=new mongoose.Schema({
         maxlength: 10,
         minlength: 10
       },
-      isAdmin: Boolean
+      isAdmin: {
+        type: Boolean,
+        default: false
+  }
 
 });
 userSchema.methods.generateAuthToken=function(){   //Note can't use arrow function here as this obj wont refer to the user obj.
@@ -42,6 +45,7 @@ function validateUser(user) {
     email: Joi.string().required(),     // we dont put genre here instead we put the id so as to recognize the genre
     password: Joi.string().min(5).max(255).required(),
     phone: Joi.string().min(10).max(10).required(),
+    isAdmin: Joi.boolean()
   };
 
   return Joi.validate(user, schema);

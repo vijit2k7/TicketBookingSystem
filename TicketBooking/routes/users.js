@@ -31,7 +31,7 @@ router.post('/', async (req, res) => {
   	if(obj) return res.status(400).send('The user is already registered'); 
   });
 
-  user = new User(_.pick(req.body,['name','email','password','phone']));
+  user = new User(_.pick(req.body,['name','email','password','phone','isAdmin']));
   const salt=await bcrypt.genSalt(10);    //Creating an encrypted salt
   user.password=await bcrypt.hash(user.password,salt);   //hashing the password using the salt
 
