@@ -57,4 +57,5 @@ Run npm start or node server for a running development server. Navigate to http:
        localhost:3000/api/tickets/reset
 
 ## Screenshots
-  
+  ❮img src="TicketBooking/postman_screenshot/register_admin_user.png" ❯
+  ![](postman_screenshot/register_admin_user.png)
