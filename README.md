@@ -58,4 +58,5 @@ Run npm start or node server for a running development server. Navigate to http:
 
 ## Screenshots
   ❮img src="TicketBooking/postman_screenshot/register_admin_user.png" ❯
-  ![](postman_screenshot/register_admin_user.png)
+  ![alt text](TicketBooking/postman_screenshot/register_admin_user.png "Description goes here")
+
